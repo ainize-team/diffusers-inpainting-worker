@@ -12,7 +12,7 @@
 [![Imports](https://img.shields.io/badge/imports-isort-brightgreen)](https://pycqa.github.io/isort/)
 [![Code style](https://img.shields.io/badge/code%20style-black-black)](https://black.readthedocs.io/en/stable/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://pre-commit.com/)
-![Package Management](https://img.shields.io/badge/package%20management-poetry-blue)
+![Package Management](https://img.shields.io/badge/package%20management-mamba-black)
 
 ## Description
 Worker Server for [Diffusers](https://huggingface.co/docs/diffusers/index).
