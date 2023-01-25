@@ -1,12 +1,12 @@
-# Diffusers Inpainting API
+# Diffusers Inpainting Worker
 
-[![Github Contributors](https://img.shields.io/github/contributors/ainize-team/diffusers-inpainting-api)](https://github.com/badges/ainize-team/diffusers-inpainting-api/contributors)
-[![GitHub issues](https://img.shields.io/github/issues/ainize-team/diffusers-inpainting-api.svg)](https://github.com/ainize-team/diffusers-inpainting-api/issues)
-![Github Last Commit](https://img.shields.io/github/last-commit/ainize-team/diffusers-inpainting-api)
-![Github Repository Size](https://img.shields.io/github/repo-size/ainize-team/diffusers-inpainting-api)
-[![GitHub Stars](https://img.shields.io/github/stars/ainize-team/diffusers-inpainting-api.svg)](https://github.com/ainize-team/diffusers-inpainting-api/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/ainize-team/diffusers-inpainting-api.svg)](https://github.com/ainize-team/diffusers-inpainting-api/network/members)
-[![GitHub Watch](https://img.shields.io/github/watchers/ainize-team/diffusers-inpainting-api.svg)](https://github.com/ainize-team/diffusers-inpainting-api/watchers)
+[![Github Contributors](https://img.shields.io/github/contributors/ainize-team/diffusers-inpainting-worker)](https://github.com/badges/ainize-team/diffusers-inpainting-worker/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/ainize-team/diffusers-inpainting-worker.svg)](https://github.com/ainize-team/diffusers-inpainting-worker/issues)
+![Github Last Commit](https://img.shields.io/github/last-commit/ainize-team/diffusers-inpainting-worker)
+![Github Repository Size](https://img.shields.io/github/repo-size/ainize-team/diffusers-inpainting-worker)
+[![GitHub Stars](https://img.shields.io/github/stars/ainize-team/diffusers-inpainting-worker.svg)](https://github.com/ainize-team/diffusers-inpainting-worker/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/ainize-team/diffusers-inpainting-worker.svg)](https://github.com/ainize-team/diffusers-inpainting-worker/network/members)
+[![GitHub Watch](https://img.shields.io/github/watchers/ainize-team/diffusers-inpainting-worker.svg)](https://github.com/ainize-team/diffusers-inpainting-worker/watchers)
 
 ![Supported Python versions](https://img.shields.io/badge/python-3.8-brightgreen)
 [![Imports](https://img.shields.io/badge/imports-isort-brightgreen)](https://pycqa.github.io/isort/)
@@ -25,4 +25,4 @@ TODO
 
 ## License
 
-[![Licence](https://img.shields.io/github/license/ainize-team/diffusers-inpainting-api.svg)](./LICENSE)
+[![Licence](https://img.shields.io/github/license/ainize-team/diffusers-inpainting-worker.svg)](./LICENSE)
