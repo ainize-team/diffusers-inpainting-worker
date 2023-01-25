@@ -1,29 +1,25 @@
 import gc
 import os
 import shutil
+from io import BytesIO
 from typing import Dict
 
+import requests
 import torch
 from firebase_admin import db, storage
 from PIL import Image
 from pydantic import HttpUrl
 
 from config import firebase_settings, model_settings
-from schemas import ImageGenerationResponse
+from schemas import InpaintResponse
 
 
 app_name = firebase_settings.firebase_app_name
 
 
-def download_image_from_storage(task_id: str, filename: str) -> Image.Image:
-    bucket = storage.bucket()
-    blob = bucket.blob(f"{app_name}/results/{task_id}/{filename}")
-    image_path = f"{task_id}/{filename}"
-    os.makedirs(task_id, exist_ok=True)
-
-    blob.download_to_filename(image_path)
-
-    return Image.open(image_path).convert("RGB")
+def download_image(url: HttpUrl) -> Image.Image:
+    response = requests.get(url)
+    return Image.open(BytesIO(response.content)).convert("RGB")
 
 
 def upload_output_images(task_id: str, num_images_per_prompt: int) -> Dict[str, HttpUrl]:
@@ -41,7 +37,7 @@ def upload_output_images(task_id: str, num_images_per_prompt: int) -> Dict[str, 
     return result
 
 
-def update_response(task_id: str, response: ImageGenerationResponse):
+def update_response(task_id: str, response: InpaintResponse):
     db.reference(f"{app_name}/tasks/{task_id}").update(response.dict())
 
 

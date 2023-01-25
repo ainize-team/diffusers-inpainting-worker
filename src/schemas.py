@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, HttpUrl
 from enums import ResponseStatusEnum
 
 
-class ImageGenerationRequest(BaseModel):
+class InpaintRequest(BaseModel):
     prompt: str = Field(
         ...,
         description="Your prompt (what you want to add in place of what you are removing)",
@@ -22,7 +22,7 @@ class Error(BaseModel):
     error_message: str
 
 
-class ImageGenerationResponse(BaseModel):
+class InpaintResponse(BaseModel):
     status: ResponseStatusEnum = ResponseStatusEnum.PENDING
     response: Optional[Dict[str, HttpUrl]]
     seed: int = 0

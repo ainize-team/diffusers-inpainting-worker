@@ -8,8 +8,8 @@ from PIL import Image
 from torch import autocast
 
 from config import model_settings
-from schemas import ImageGenerationRequest
-from utils import download_image_from_storage
+from schemas import InpaintRequest
+from utils import download_image
 
 
 class InpaintModel:
@@ -29,13 +29,13 @@ class InpaintModel:
             logger.error("CPU Mode is not Supported")
             exit(1)
 
-    def generate(self, task_id: str, data: ImageGenerationRequest) -> None:
+    def inpaint(self, task_id: str, data: InpaintRequest) -> None:
         if self.inpaint_pipeline is None:
             raise Exception("Model is not loaded completely.")
 
         generator = torch.cuda.manual_seed(data.seed)
-        image = download_image_from_storage(task_id, "image.png")
-        mask_image = download_image_from_storage(task_id, "mask_image.png")
+        image = download_image(data.image_url)
+        mask_image = download_image(data.mask_image_url)
         with torch.inference_mode():
             with autocast("cuda"):
                 images: List[Image.Image] = self.diffusion_pipeline(
