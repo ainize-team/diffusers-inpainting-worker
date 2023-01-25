@@ -24,7 +24,8 @@ class InpaintModel:
             self.inpaint_pipeline = StableDiffusionInpaintPipeline.from_pretrained(
                 model_settings.model_name_or_path,
                 torch_dtype=torch.float16,
-            )
+            ).cuda()
+            self.inpaint_pipeline.enable_xformers_memory_efficient_attention()
         else:
             logger.error("CPU Mode is not Supported")
             exit(1)
