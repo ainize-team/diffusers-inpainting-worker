@@ -1,3 +1,4 @@
+import datetime
 import gc
 import os
 import shutil
@@ -14,7 +15,7 @@ from config import firebase_settings, model_settings
 from schemas import InpaintResponse
 
 
-app_name = firebase_settings.firebase_app_name
+app_name = firebase_settings.app_name
 
 
 def download_image(url: HttpUrl) -> Image.Image:
@@ -45,3 +46,7 @@ def clear_memory() -> None:
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+
+
+def get_now_timestamp() -> int:
+    return int(datetime.utcnow().timestamp() * 1000)

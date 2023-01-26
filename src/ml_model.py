@@ -14,7 +14,7 @@ from utils import download_image
 
 class InpaintModel:
     def __init__(self):
-        self.inpaint_pipeline = Union[StableDiffusionInpaintPipeline, None] = None
+        self.inpaint_pipeline: Union[StableDiffusionInpaintPipeline, None] = None
         os.makedirs(model_settings.model_output_path, exist_ok=True)
 
     def load_model(self) -> None:

@@ -4,7 +4,7 @@ from pydantic import BaseSettings
 class CeleryWorkerSettings(BaseSettings):
     worker_name: str = "Celery Worker"
     broker_base_uri: str = "amqp://guest:guest@localhost:5672/"
-    vhost_name: str = "stable-diffusion-2-inpainting"
+    vhost_name: str = "/"
 
 
 class ModelSettings(BaseSettings):
