@@ -24,8 +24,9 @@ class InpaintModel:
             self.inpaint_pipeline = StableDiffusionInpaintPipeline.from_pretrained(
                 model_settings.model_name_or_path,
                 torch_dtype=torch.float16,
-            ).cuda()
+            ).to('cuda')
             self.inpaint_pipeline.enable_xformers_memory_efficient_attention()
+
         else:
             logger.error("CPU Mode is not Supported")
             exit(1)
@@ -35,11 +36,13 @@ class InpaintModel:
             raise Exception("Model is not loaded completely.")
 
         generator = torch.cuda.manual_seed(data.seed)
+
         image = download_image(data.image_url)
         mask_image = download_image(data.mask_image_url)
+
         with torch.inference_mode():
             with autocast("cuda"):
-                images: List[Image.Image] = self.diffusion_pipeline(
+                images: List[Image.Image] = self.inpaint_pipeline(
                     prompt=data.prompt,
                     image=image,
                     mask_image=mask_image,
@@ -47,6 +50,7 @@ class InpaintModel:
                     generator=generator,
                     num_images_per_prompt=data.num_images_per_prompt,
                 ).images
+
         output_path = os.path.join(model_settings.model_output_path, task_id)
         os.makedirs(output_path, exist_ok=True)
         for idx, image in enumerate(images):
