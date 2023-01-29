@@ -25,6 +25,6 @@ class Error(BaseModel):
 class InpaintResponse(BaseModel):
     status: ResponseStatusEnum = ResponseStatusEnum.PENDING
     response: Optional[Dict[str, HttpUrl]]
-    seed: int = 0
+    seed: int = 42
     error: Optional[Error]
     updated_at: int = 0
