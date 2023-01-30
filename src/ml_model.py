@@ -42,6 +42,7 @@ class InpaintModel:
 
         with torch.inference_mode():
             with autocast("cuda"):
+                width, height = image.size
                 images: List[Image.Image] = self.inpaint_pipeline(
                     prompt=data.prompt,
                     image=image,
@@ -49,6 +50,8 @@ class InpaintModel:
                     guidance_scale=data.guidance_scale,
                     generator=generator,
                     num_images_per_prompt=data.num_images_per_prompt,
+                    width=width,
+                    height=height
                 ).images
 
         output_path = os.path.join(model_settings.model_output_path, task_id)
