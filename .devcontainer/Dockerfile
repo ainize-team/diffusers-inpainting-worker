@@ -6,7 +6,7 @@ ENV \
     PYTHONDONTWRITEBYTECODE=1 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    PROJECT_NAME="diffusers-inpainting-worker-dev" \
+    PROJECT_NAME="diffusers-inpainting-worker" \
     DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
