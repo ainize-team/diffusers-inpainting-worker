@@ -10,6 +10,10 @@ class InpaintRequest(BaseModel):
         ...,
         description="Your prompt (what you want to add in place of what you are removing)",
     )
+    negative_prompt: Optional[str] = Field(
+        "",
+        description="prompt value that you do not want to see in the resulting image",
+    )
     image_url: HttpUrl
     mask_image_url: HttpUrl
     seed: int = Field(default=42, ge=0, le=4294967295)
