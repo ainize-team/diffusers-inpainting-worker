@@ -39,12 +39,12 @@ class InpaintModel:
 
         image = download_image(data.image_url)
         mask_image = download_image(data.mask_image_url)
-
         with torch.inference_mode():
             with autocast("cuda"):
                 width, height = image.size
                 images: List[Image.Image] = self.inpaint_pipeline(
                     prompt=data.prompt,
+                    negative_prompt=data.negative_prompt,
                     image=image,
                     mask_image=mask_image,
                     guidance_scale=data.guidance_scale,
