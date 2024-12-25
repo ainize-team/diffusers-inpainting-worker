@@ -17,45 +17,66 @@
 ## Description
 Worker Server for [Diffusers](https://huggingface.co/docs/diffusers/index).
 
-## Installation
-1. Run RabbitMQ image as a Broker
-```
-docker run -d \
-    --name inpainting-rabbitmq \
-    -p 5672:5672 \
-    -p 15672:15672 \
-    --restart=unless-stopped \
-    rabbitmq:3.11.2-management
-```
+## How to start
+### Using docker-compose(recommended)
+1. Create RabbitMQ and FastAPI container(refer to [diffusers-inpainting-api](https://github.com/ainize-team/diffusers-inpainting-api))
 
-2. Build Docker image
-```
+2. Clone repository
+```shell
 git clone https://github.com/ainize-team/diffusers-inpainting-worker
 cd diffusers-inpainting-worker
-docker build -t inpainting-worker .
 ```
-3. Run Docker Image
+
+3. Edit [docker-compose.yml](./docker-compose.yml) and [.env file](./.env.sample) for your project.
+- Vhost for each worker is in [docker-compose.yml](./docker-compose.yml) and common RabbitMQ config is in [.env file](./.env.sample).
+
+4. Run worker container
+```shell
+docker-compose up -d
+
+# If you want to run a specific worker container, write service name.
+docker-compose up -d <service name>
 ```
-docker run -d --name inpainting-container-0 \
+
+### Using docker
+1. Run RabbitMQ comtainer as a broker
+```shell
+docker run -d --name diffusers-inpainting-rabbitmq -p 5672:5672 -p 15672:15672 --restart=unless-stopped rabbitmq:3.11.2-management
+```
+
+2. Clone repository
+```shell
+git clone https://github.com/ainize-team/diffusers-inpainting-worker
+cd diffusers-inpainting-worker
+```
+
+3. Build docker image
+```shell
+docker build -t diffusers-inpainting-worker .
+```
+
+4. Run docker container
+```
+docker run -d --name diffusers-inpainting-worker \
 --gpus='"device=0"' \
--e BROKER_BASE_URI=<BROKER_BASE_URI> \
--e VHOST_NAME=<VHOST_NAME> \
--e APP_NAME=<APP_NAME> \
--e DATABASE_URL=<DATABASE_URL> \
--e STORAGE_BUCKET=<STORAGE_BUCKET>
+-e BROKER_URI=<broker_uri> \
+-e FIREBASE_APP_NAME=<firebase_app_name> \
+-e FIREBASE_DATABASE_URL=<firebase_database_urlL> \
+-e FIREBASE_STORAGE_BUCKET=<firebase_storage_bucket>
 -v <firebase_credential_path>:/app/key -v <model_local_path>:/app/model \
-inpainting-worker
+diffusers-inpainting-worker
 ```
 
 or
 
 ```
-docker run -d --name inpainting-container-0 \
+docker run -d --name diffusers-inpainting-worker \
 --gpus='"device=0"' \
 --env-file .env \
 -v <firebase_credential_path>:/app/key -v <model_local_path>:/app/model \
-inpainting-worker
+diffusers-inpainting-worker
 ```
+
 ## Usage
 * Check our [diffusers-inpainting-api](https://github.com/ainize-team/diffusers-inpainting-api) Repo.
 
