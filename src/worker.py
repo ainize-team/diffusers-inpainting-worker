@@ -8,7 +8,7 @@ from config import celery_worker_settings, firebase_settings
 
 app = Celery(
     celery_worker_settings.worker_name,
-    broker=f"{celery_worker_settings.broker_base_uri}/{celery_worker_settings.vhost_name}",
+    broker=f"{celery_worker_settings.broker_uri}",
     include=["tasks"],
 )
 app.config_from_object(celeryconfig)
@@ -18,7 +18,7 @@ cred = credentials.Certificate(firebase_settings.cred_path)
 firebase_admin.initialize_app(
     cred,
     {
-        "databaseURL": firebase_settings.database_url,
-        "storageBucket": firebase_settings.storage_bucket,
+        "databaseURL": firebase_settings.firebase_database_url,
+        "storageBucket": firebase_settings.firebase_storage_bucket,
     },
 )

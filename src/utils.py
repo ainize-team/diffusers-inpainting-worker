@@ -15,7 +15,7 @@ from config import firebase_settings, model_settings
 from schemas import InpaintResponse
 
 
-app_name = firebase_settings.app_name
+app_name = firebase_settings.firebase_app_name
 
 
 def download_image(url: HttpUrl) -> Image.Image:
