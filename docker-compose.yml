@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  stable-diffusion-v2-inpainting:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stable-diffusion-v2-inpainting-worker
+    env_file:
+      - .env
+    environment:
+      - VHOST_NAME=stable-diffusion-v2-inpainting
+    volumes:
+      - <firebase_credential_path>:/app/key
+      - <model_local_path>:/app/model
+    networks:
+      - diffusers-inpainting-api_dev
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [<gpu_id>]
+              capabilities: [gpu]
+
+networks:
+  diffusers-inpainting-api_dev:
+    external: true
